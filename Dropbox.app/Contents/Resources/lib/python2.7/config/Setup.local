@@ -1,0 +1,35 @@
+# Edit this file for local setup changes
+OPENSSL_DIR=../openssl
+POW_DIR=../POW
+
+SSL_OPTS= -I$(OPENSSL_DIR) \
+    -I$(OPENSSL_DIR)/crypto \
+    -I$(OPENSSL_DIR)/include \
+    -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DL_ENDIAN \
+    -fvisibility=hidden
+
+POW $(POW_DIR)/POW.c $(SSL_OPTS) -lssl-static -lcrypto-static
+
+SQLITE3_OPTS=-DMODULE_NAME='"sqlite3"' \
+    -DPYSQLITE_KEY_ARG=trevor \
+    -DPYSQLITE_REKEY_FUNC_TEMPLATE=teresa \
+    -Dsqlite3_key=s_teresa \
+    -Dsqlite3_rekey=s_jon \
+    -Dsqlite3_open=s_nando \
+    -DSQLITE_HAS_CODEC=1 \
+    -DSQLITE_USE_URI=1 \
+    -I../sqlite \
+    -fvisibility=hidden
+
+_sqlite3 _sqlite/cache.c \
+    _sqlite/connection.c \
+    _sqlite/cursor.c \
+    _sqlite/microprotocols.c \
+    _sqlite/module.c \
+    _sqlite/prepare_protocol.c \
+    _sqlite/row.c \
+    _sqlite/statement.c \
+    _sqlite/util.c \
+    ../../sqlite/see-sqlite3.c \
+    $(SQLITE3_OPTS)
+

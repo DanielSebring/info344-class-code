@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>URL</key>
-	<string>https://login.microsoftonline.com/login.srf?wa=wsignin1.0&amp;whr=uw.edu&amp;wreply=https:%2F%2Fuwnetid-my%2Esharepoint%2Ecom</string>
-</dict>
-</plist>

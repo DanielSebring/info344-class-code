@@ -8,12 +8,13 @@ var dbConfig = require('./secret/config-maria.json');
 var bluebird = require('bluebird');
 
 //create connection pool to MariaDV server
+//
+//
 var connPool = bluebird.promisifyAll(mysql.createPool(dbConfig));
-
 //require out stories controller
 var storiesApi = require('./controllers/stories-api');
 //require out story model
-var Story = require('./models/story.js').Model(connPool);
+var stories = require('./models/stories.js').Model(connPool);
 
 //create express application
 var app = express();
@@ -27,7 +28,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/static'));
 
 //mount the sorties api router under /api/v1
-app.use('/api/v1', storiesApi.Router(Story));
+app.use('/api/v1', storiesApi.Router(stories));
 //app.use('/controllers/stories-api.js', storiesApi.Router(Story));
 
 app.listen(80, function() {
